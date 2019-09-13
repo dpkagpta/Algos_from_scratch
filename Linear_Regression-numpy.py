@@ -1,18 +1,8 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 # imorting libraries
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets, linear_model, metrics
-
-
-# # Simple (OLS) Linear Regression Using Numpy
-
-# In[2]:
+from sklearn.model_selection import train_test_split
 
 
 def coefficients(x, y):
@@ -32,8 +22,6 @@ def coefficients(x, y):
     return(b_0, b_1)
 
 
-# In[3]:
-
 
 def regression_line(x, y, b):
     plt.scatter(x, y, color = 'm', marker = '*', s=45)
@@ -49,9 +37,6 @@ def regression_line(x, y, b):
     
 
 
-# In[4]:
-
-
 def main():
     
     #datasets
@@ -65,57 +50,28 @@ def main():
     regression_line(x, y, b)
 
 
-# In[5]:
-
 
 if __name__ == '__main__':
     main()
 
 
 # # Multiple Linear Regression
-
-# In[6]:
-
-
 boston_data = datasets.load_boston(return_X_y=False)
-
-
-# In[7]:
 
 
 X = boston_data.data
 y = boston_data.target
 
-
-# In[8]:
-
-
-from sklearn.model_selection import train_test_split
-
 x_train, x_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 1)
-
-
-# In[9]:
-
 
 reg = linear_model.LinearRegression()
 reg.fit(x_train, y_train)
 
 
-# In[10]:
-
-
 print('Coefficients:\n', reg.coef_)
 
 
-# In[11]:
-
-
 print('Variance Score:\n', reg.score(x_test, y_test))
-
-
-# In[12]:
-
 
 # plotting residuals in training data
 plt.scatter(reg.predict(x_train), reg.predict(x_train) - y_train, color = 'green', s = 15, label = 'train_data')
@@ -129,16 +85,3 @@ plt.hlines(y = 0, xmin = 0, xmax = 50, linewidth = 2)
 plt.legend(loc = 'upper right')
 plt.title('residual errors')
 plt.show()
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
